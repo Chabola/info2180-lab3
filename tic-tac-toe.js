@@ -16,6 +16,8 @@ function myScript() {
 	let board =[];
 	
 	squares.forEach(square => {
+		square.addEventListener('mouseover', hover);
+		square.addEventListener('mouseout', nohover);
 		square.addEventListener('click', whenclick, {once: true})
 	})
 	function whenclick(e) {
@@ -34,7 +36,12 @@ function myScript() {
 		}
 
 	}
-	
+	function hover(e) {
+		e.target.classList.add("hover");
+	}
+	function nohover(e) {
+		e.target.classList.remove("hover");
+	}
 }
 /*let elementsArray = document.querySelectorAll(".square");
 	elementsArray.forEach(function(elem) {
