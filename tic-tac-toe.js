@@ -11,6 +11,7 @@ function myScript() {
 	document.getElementById('board').getElementsByTagName('div')[8].classList.add('square');
 
 	const squares = Array.from(document.querySelectorAll('.square'));
+	const btn = document.querySelector(".btn");
 	let playing =true;
 	let playerisX = true;
 	let board =['', '', '', '', '', '', '', '', ''];
@@ -24,7 +25,6 @@ function myScript() {
 		[0,4,8],
 		[2,4,6]
 	]
-	
 	squares.forEach(square => {
 		square.addEventListener('mouseover', function(e) {
 		    e.target.classList.add('hover');
@@ -33,8 +33,8 @@ function myScript() {
 		    e.target.classList.remove('hover');
 		  });
 		square.addEventListener('click', whenclick, {once: true})
+		newgame();
 	})	
-	
 	function whenclick(e) {
 		if (playerisX == true && playing == true) {
 			e.target.classList.add("X");
@@ -43,7 +43,6 @@ function myScript() {
 			let i = squares.findIndex(sq);
 			board[i] = "X";
 			if (winner()) {
-				console.log("winner");
 				playing = false;
 				if (playerisX == true) {
 					document.getElementById('status').textContent = "Congratulations! X is the Winner!";
@@ -60,7 +59,7 @@ function myScript() {
 			let i = squares.findIndex(sq);
 			board[i] = "O";
 			if (winner()) {
-				console.log("winner");
+				playing = false;
 				if (playerisX == false) {
 					document.getElementById('status').textContent = "Congratulations! O is the Winner!";
 					document.getElementById('status').classList.add("you-won");
@@ -68,8 +67,6 @@ function myScript() {
 			}
 			playerisX = true;
 		}
-	
-
 	}
 	function winner(){
 		let roundwon = false;
@@ -86,6 +83,12 @@ function myScript() {
 	            return roundwon;
 	        }
 	    }
+	}
+	function newgame() {
+		const btn = document.querySelector(".btn");
+		btn.addEventListener('click',  function(e) {
+			location.reload();
+		  });
 	}
 }
 
